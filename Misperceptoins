@@ -1,0 +1,51 @@
+// STATA commands for inequality perception paper
+// These commands use Luxembourg Income Study Data. Before running the code, you first need to request for an access to LIS data.
+// You then need to use the LISSY Java Interface to run the codes.
+
+// The following commands use personal level data for the United States in 2010.
+
+foreach ccyy in  us10 {        
+di "`ccyy'"        
+use age pmi pmxit educ occb1 using $`ccyy'p, clear      
+ 
+// Calculating net earnings
+gen dpi=pmi-pmxit       
+drop if dpi==.    
+   
+qui sum dpi, de
+
+       
+// Use the following code to trim the income data at the to and the bottom
+// drop if dpi<0       
+// drop if dpi>r(p95)     
+
+// Otherwise use the following code to winsorise the data (trim and add to the lowest and highest bins)  
+replace dpi=0 if dpi<0
+replace dpi=r(p95) if dpi>r(p95)
+  
+qui sum dpi, de     
+
+// The following code are for dividing the income distribution into 7 equal bins
+    
+gen dif=r(max)-r(min)    
+     
+scalar bin1=r(min)+dif/7     
+scalar bin2=r(min)+dif*2/7     
+scalar bin3=r(min)+dif*3/7     
+scalar bin4=r(min)+dif*4/7     
+scalar bin5=r(min)+dif*5/7     
+scalar bin6=r(min)+dif*6/7     
+scalar bin7=r(min)+dif    
+     
+gen binn=0     
+replace binn=1 if (dpi<bin1)     
+replace binn=2 if (dpi<bin2) & (dpi>=bin1)     
+replace binn=3 if (dpi<bin3) & (dpi>=bin2)     
+replace binn=4 if (dpi<bin4) & (dpi>=bin3)     
+replace binn=5 if (dpi<bin5) & (dpi>=bin4)     
+replace binn=6 if (dpi<bin6) & (dpi>=bin5)     
+replace binn=7 if (dpi<=bin7) & (dpi>=bin6)     
+      
+tab binn     
+     
+}        
