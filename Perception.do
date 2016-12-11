@@ -8,7 +8,7 @@ cd "/Users/Hadzzz/Desktop"
 
 set more off
 
-clear
+clear all
 quietly infix              ///
   int     year      1-4    ///
   long    serial    5-9    ///
@@ -795,44 +795,84 @@ label define occ2010_lbl 9999 `"Unknown"', add
 label values occ2010 occ2010_lbl
 
 
-
-
-
+drop if age<19                         
+drop if age>79
+// Grouping age
+recode age (min/24=1) (25/29=2) (30/34=3) (35/39=4) (40/44=5) (45/49=6) (50/54=7) (55/59=8) (60/64=9) (65/69=10) (70/74=11) (75/max=12)
+               
+// Grouping education
+drop if educ99==.
+recode educ99 (0/9=1) (10/14=2) (15/18=3), gen(edu) // low = 0-12 grade but no degree, medium = high school degree, high = more than high school
 
 // Calculating net earnings
 gen dpi=ftotval 
 // drop if dpi==.    
-   
 
 // Variable trim chops off the top and the bottom of the income distribution
 // Variable wins winsorizes the top and bottom of the income distribution (trims and add to the lowest and highest bins)
-replace dpi=dpi/ (famsize^0.5) 
-qui sum dpi [w=hwtsupp], de 
-gen trim=dpi if dpi>=r(p1) & dpi<=r(p99)replace dpi=0 if dpi<0replace dpi=r(p95) if dpi>r(p95)
 
+gen binn=0
+
+forvalues i = 1(1)3 {
+	forvalues j = 1(1)12 {
+replace dpi=dpi/ (famsize^0.5) if edu==`i' & age==`j'
+qui sum dpi [w=hwtsupp] if edu==`i' & age==`j', de 
+// gen trim=dpi if dpi>=r(p1) & dpi<=r(p99)replace dpi=0 if dpi<0 & edu==`i' & age==`j'replace dpi=r(p95) if dpi>r(p95) & edu==`i' & age==`j'
 
 // The following code are for dividing the income distribution into 7 equal bins
-qui sum dpi [w=hwtsupp], de 
-gen dif=r(max)-r(min)
-
+qui sum dpi [w=hwtsupp] if edu==`i' & age==`j', de 
+scalar dif=r(max)-r(min)
      
 scalar bin1=r(min)+dif/7     
 scalar bin2=r(min)+dif*2/7     
-scalar bin3=r(min)+dif*3/7     
-scalar bin4=r(min)+dif*4/7     
-scalar bin5=r(min)+dif*5/7     
-scalar bin6=r(min)+dif*6/7     
-scalar bin7=r(min)+dif    
+scalar bin3=r(min)+dif*3/7 
+scalar bin4=r(min)+dif*4/7 
+scalar bin5=r(min)+dif*5/7 
+scalar bin6=r(min)+dif*6/7 
+scalar bin7=r(min)+dif   
      
-gen binn=0     
-replace binn=1 if (dpi<bin1)     
-replace binn=2 if (dpi<bin2) & (dpi>=bin1)     
-replace binn=3 if (dpi<bin3) & (dpi>=bin2)     
-replace binn=4 if (dpi<bin4) & (dpi>=bin3)     
-replace binn=5 if (dpi<bin5) & (dpi>=bin4)     
-replace binn=6 if (dpi<bin6) & (dpi>=bin5)     
-replace binn=7 if (dpi<=bin7) & (dpi>=bin6)     
-      
-tab binn  
-hist dpi, bin(7) kden
-  
+replace binn=0  
+replace binn=1 if (dpi<bin1) 
+replace binn=2 if (dpi<bin2) & (dpi>=bin1) 
+replace binn=3 if (dpi<bin3) & (dpi>=bin2) 
+replace binn=4 if (dpi<bin4) & (dpi>=bin3) 
+replace binn=5 if (dpi<bin5) & (dpi>=bin4) 
+replace binn=6 if (dpi<bin6) & (dpi>=bin5) 
+replace binn=7 if (dpi<=bin7) & (dpi>=bin6)
+
+di `i', `j'      
+tabulate binn if edu==`i' & age==`j'
+// hist dpi, bin(7) kden
+}
+}
+
+replace dpi=dpi/ (famsize^0.5)
+qui sum dpi [w=hwtsupp], de 
+// gen trim=dpi if dpi>=r(p1) & dpi<=r(p99)replace dpi=0 if dpi<0replace dpi=r(p95) if dpi>r(p95)
+
+// The following code are for dividing the income distribution into 7 equal bins
+qui sum dpi [w=hwtsupp], de 
+scalar dif=r(max)-r(min)
+     
+scalar bin1=r(min)+dif/7     
+scalar bin2=r(min)+dif*2/7     
+scalar bin3=r(min)+dif*3/7 
+scalar bin4=r(min)+dif*4/7 
+scalar bin5=r(min)+dif*5/7 
+scalar bin6=r(min)+dif*6/7 
+scalar bin7=r(min)+dif   
+     
+replace binn=0  
+replace binn=1 if (dpi<bin1) 
+replace binn=2 if (dpi<bin2) & (dpi>=bin1) 
+replace binn=3 if (dpi<bin3) & (dpi>=bin2) 
+replace binn=4 if (dpi<bin4) & (dpi>=bin3) 
+replace binn=5 if (dpi<bin5) & (dpi>=bin4) 
+replace binn=6 if (dpi<bin6) & (dpi>=bin5) 
+replace binn=7 if (dpi<=bin7) & (dpi>=bin6)
+
+     
+tabulate binn
+
+
+
