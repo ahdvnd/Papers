@@ -97,15 +97,6 @@ gen dpi=ftotval
 // drop if dpi==.    
    
 
-       
-// Use the following code to trim the income data at the to and the bottom
-// drop if dpi<0       
-// drop if dpi>r(p95)     
-
-// Otherwise use the following code to winsorise the data (trim and add to the lowest and highest bins)  
-
-
-
 // Variable trim chops off the top and the bottom of the income distribution
 // Variable wins winsorizes the top and bottom of the income distribution (trims and add to the lowest and highest bins)
 replace dpi=dpi/ (famsize^0.5) 
