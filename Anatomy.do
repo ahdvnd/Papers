@@ -107,4 +107,4 @@ recode educ_c (31/38=1) (39=2) (40/42=3) (43=4) (44/46=5), gen(educ2)
 ineqdeco dpi, by(age2) 
       
                
-}     
+}  
