@@ -1,6 +1,6 @@
 clear all
 
-cd "/Users/Hadzzz/Github/Papers"
+cd "/Users/Hadzzz/Github/Papers/Perception"
 use "ISSP.dta"
 
 keep if C_ALPHAN=="US"

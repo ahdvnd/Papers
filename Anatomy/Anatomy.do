@@ -1,0 +1,110 @@
+//Stata Codes for accessing data from LIS and creating the tables
+
+foreach ccyy in us79 us13 {                           
+di "`ccyy'"                           
+use age sex pi immigr enroll educ educ_c nchildren occb1 hours marital emp ethnic_c pxit using $`ccyy'p, clear                           
+                       
+gen dpi=pi-pxit                   
+gen hrs=hours                       
+                
+drop if dpi==.                         
+drop if dpi<=0                  
+//drop if educ==.            
+//drop if educ_c==.                     
+//drop if hrs<=0                   
+//drop if hrs==.              
+drop if age<19                         
+drop if age>79          
+//drop if marital==.          
+//drop if occb1==. | occb1==10         
+//keep if emp==1       
+//keep if hrs>=35         
+   
+   
+//keep if occb1  
+//ginidesc dpi, by(sex)  
+//pshare estimate dpi, nquantiles(10)   
+//pshare estimate dpi if sex==1, nquantiles(10)  
+//pshare estimate dpi if sex==2, nquantiles(10)  
+   
+   
+        
+//ginidesc dpi, by(occb1)        
+//recode occb1 (1/3=1) (5=2) (4=3) (6/9=4), gen(occat)        
+//drop if occat>4         
+//ginidesc dpi, by(occat)        
+         
+         
+// Autor's calculations         
+//recode occb1 (1/3=1) (5=2) (4=3) (6/9=4), gen(occat)         
+//drop if occat>4         
+//tab occat         
+//tab occat if sex==1         
+//tab occat if sex==2         
+//tab occat, sum(dpi)         
+//tab occat if sex==1, sum(dpi)         
+//tab occat if sex==2, sum(dpi)         
+        
+   
+   
+          
+          
+recode age (min/24=1) (25/29=2) (30/34=3) (35/39=4) (40/44=5) (45/49=6) (50/54=7) (55/59=8) (60/64=9) (65/69=10) (70/74=11) (75/max=12), gen(age2)                
+//recode age (min/29=1) (30/39=2) (40/49=3) (50/59=4) (60/69=5) (70/max=6), gen(age3)          
+//recode ethnic_c (1=1) (3=2) (2 4=3) ( 5 6 7 8=0), gen(race2) // Racial Categories: 1=white 2=black 3=hispanic          
+//recode educ (002/071=1) (073=2) (081/092=3) (111=4) (123/125=5), gen(educ2) // Educational groups 1=less than HS 2=HS 3=Some college 4=College 5=Graduate Degree                 
+//recode marital (110=1) (210/223 = 0), gen(marst2) // Marital categories: 0=umnarried 1=married                  
+//recode occ2010 (0010/3540=1) (3600/4650=2) (4700/5940=3) (6000/7630=4) (7700/9750=4), gen(occucat) //occupational categories 1=abstract 2=manual 3=cognitive-routine 4=manual-routine          
+//sex categories 1=male 2=female          
+//drop if race2==5  //getting rid of "Other" as race category          
+    
+if "`ccyy'"=="us79" {      
+recode educ_c (1/25=1) (26=2) (27/33=3) (34=4) (35/38=5), gen(educ2)          
+}      
+else if "`ccyy'"=="us13" {      
+recode educ_c (31/38=1) (39=2) (40/42=3) (43=4) (44/46=5), gen(educ2)         
+}      
+    
+    
+    
+          
+//drop if race2==0          
+                         
+                     
+//egen sex_race_age=group(sex race2 age2)          
+          
+//tab sex_race_age, sum(marst2) nostandard nofreq //for calculating the share married in each cohort          
+//tab sex_race_age, sum(nchildren) nomeans nofreq //for calculating the variance of # of children in each cohort          
+//tab sex_race_age if immigr==1           
+//tab sex_race_age //for calculating the share of foreign-born individuals in each cohort          
+//tab sex_race_age if educ_c>=43          
+          
+//ineqdeco dpi, by(sex_race_age)          
+      
+      
+//ginidesc dpi, by(age2)                       
+//tab age2, sum(hrs) nomeans nofreq      
+      
+//keep if emp==1      
+//ginidesc dpi, by(age2)                       
+//tab age2, sum(hrs) nomeans nofreq      
+      
+      
+//keep if hrs>=20      
+//ginidesc dpi, by(age2)                       
+      
+//keep if hrs>=35      
+//ginidesc dpi, by(age2)         
+     
+     
+//drop if enroll==.     
+//keep if enroll==200     
+    
+//egen edu_age=group(educ2 age2)    
+//ginidesc dpi, by(edu_age)     
+ 
+ 
+ineqdeco dpi, by(age2) 
+      
+               
+}  
