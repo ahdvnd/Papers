@@ -795,9 +795,14 @@ label define occ2010_lbl 9999 `"Unknown"', add
 label values occ2010 occ2010_lbl
 
 
+// the variable "trimrange" sets the trimming treshold on top of the income distribution
+scalar trimrange = 99
+
+
+
+
 drop if age<19                         
 drop if age>79
-scalar trimrange = 99
 // Grouping age
 //recode age (min/24=1) (25/29=2) (30/34=3) (35/39=4) (40/44=5) (45/49=6) (50/54=7) (55/59=8) (60/64=9) (65/69=10) (70/74=11) (75/max=12)
 recode age (min/29=1) (30/39=2) (40/49=3) (50/59=4) (60/69=5) (70/max=6)
@@ -821,7 +826,7 @@ scalar edumax = r(max)
 
 forvalues i = 1(1)`=edumax' {
 	forvalues j = 1(1)`=agemax' {
-		replace dpi=dpi/ (famsize^0.5) if edu==`i' & age==`j'
+		replace dpi=dpi/ (famsize) if edu==`i' & age==`j'
 		qui sum dpi [w=hwtsupp] if edu==`i' & age==`j', de 
 		// gen trim=dpi if dpi>=r(p1) & dpi<=r(p99)		replace dpi=0 if dpi<0 & edu==`i' & age==`j'		replace dpi=r(p`=trimrange') if dpi>r(p`=trimrange') & edu==`i' & age==`j'
 
