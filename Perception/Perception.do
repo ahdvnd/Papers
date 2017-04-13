@@ -796,42 +796,55 @@ label values occ2010 occ2010_lbl
 
 
 // the variable "trimrange" sets the trimming treshold on top of the income distribution
-scalar trimrange = 99
-
-
+scalar trimrange = 95
 
 
 drop if age<19                         
-drop if age>79
+drop if age>69
+
 // Grouping age
 //recode age (min/24=1) (25/29=2) (30/34=3) (35/39=4) (40/44=5) (45/49=6) (50/54=7) (55/59=8) (60/64=9) (65/69=10) (70/74=11) (75/max=12)
-recode age (min/29=1) (30/39=2) (40/49=3) (50/59=4) (60/69=5) (70/max=6)
+recode age (min/29=1) (30/39=2) (40/49=3) (50/59=4) (60/max=5)
                
 // Grouping education
 drop if educ99==.
 recode educ99 (0/9=1) (10/14=2) (15/18=3), gen(edu) // low = 0-12 grade but no degree, medium = high school degree, high = more than high school
 
+// Grouping occupations
+drop if occ2010==.
+recode occ2010 (0/999=0) (1000/1999=1) (2000/2999=2) (3000/3999=3) (4000/4999=4) (5000/5999=5) (6000/6999=6) (7000/7999=7) (8000/8999=8) (9000/9999=9)
+
+
 // Calculating net earnings
-gen dpi=ftotval 
-// drop if dpi==.    
+gen dpi=ftotval
+drop if dpi==.    
 
 // Variable trim chops off the top and the bottom of the income distribution
 // Variable wins winsorizes the top and bottom of the income distribution (trims and add to the lowest and highest bins)
 
 gen binn = 0
+
 qui su age, de
 scalar agemax = r(max)
+
 qui su edu, de
 scalar edumax = r(max)
 
+qui su occ2010
+scalar occumax = 1
+
+
+
 forvalues i = 1(1)`=edumax' {
 	forvalues j = 1(1)`=agemax' {
-		replace dpi=dpi/ (famsize) if edu==`i' & age==`j'
-		qui sum dpi [w=hwtsupp] if edu==`i' & age==`j', de 
-		// gen trim=dpi if dpi>=r(p1) & dpi<=r(p99)		replace dpi=0 if dpi<0 & edu==`i' & age==`j'		replace dpi=r(p`=trimrange') if dpi>r(p`=trimrange') & edu==`i' & age==`j'
+		replace dpi=ftotval/(famsize^0.5) if edu==`i' & age==`j'
+		qui sum dpi [w=hwtsupp] if occ2010==`k' & edu==`i' & age==`j', de 
+		// gen trim=dpi if dpi>=r(p1) & dpi<=r(p99)		
+		//This is for trimming income data (similar to winsorizing)
+		replace dpi=0 if dpi<0 & occ2010==`k' & edu==`i' & age==`j'		replace dpi=r(p`=trimrange') if dpi>r(p`=trimrange') & occ2010==`k' & edu==`i' & age==`j'
 
 		// The following code are for dividing the income distribution into 7 equal bins
-		qui sum dpi [w=hwtsupp] if edu==`i' & age==`j', de 
+		qui sum dpi [w=hwtsupp] if occ2010==`k' & edu==`i' & age==`j', de 
 		scalar dif=r(max)-r(min)
      
 		scalar bin1=r(min)+dif/7     
@@ -850,14 +863,15 @@ forvalues i = 1(1)`=edumax' {
 		replace binn=5 if (dpi<bin5) & (dpi>=bin4) 
 		replace binn=6 if (dpi<bin6) & (dpi>=bin5) 
 		replace binn=7 if (dpi<=bin7) & (dpi>=bin6)
-
-		di `i', `j'      
-		tabulate binn if edu==`i' & age==`j'
+		
+		di "Occupation=" as result `k', "Education=" as result `i', "Age=" as result `j'     
+		tabulate binn if occ2010==`k' & edu==`i' & age==`j'
 		// hist dpi, bin(7) kden
 	}
 }
+}
 
-replace dpi=dpi/ (famsize^0.5)
+replace dpi=ftotval / (famsize^0.5)
 qui sum dpi [w=hwtsupp], de 
 // gen trim=dpi if dpi>=r(p1) & dpi<=r(p99)replace dpi=0 if dpi<0replace dpi=r(p`=trimrange') if dpi>r(p`=trimrange')
 
@@ -882,8 +896,29 @@ replace binn=5 if (dpi<bin5) & (dpi>=bin4)
 replace binn=6 if (dpi<bin6) & (dpi>=bin5)
 replace binn=7 if (dpi<=bin7) & (dpi>=bin6)
 
-     
+di "Overall Distribution"     
 tabulate binn
+
+
+
+//sum weight
+//gen normwgt = weight/r(mean)
+//bysort binn: egen wgtcount = sum(normwgt)
+//egen wgtsum = sum(normwgt)
+//gen wgtshare = 100*wgtcount/wgtsum
+//tabstat wgtshare, by(binn) stat(mean) nototal save
+//matrix table = share, count
+//matrix list table
+
+
+
+//tab binn, matcell(xx) 
+//mat c = (J(7,1,1))'* xx
+//mat cc = (J(7,1,1))*c
+//mat zz = xx :/ cc
+
+
+
 
 
 
