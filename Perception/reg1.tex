@@ -1,64 +1,76 @@
 \begin{table}[htbp]\centering
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
 \caption{Basic Regression\label{reg1}}
-\begin{tabular}{l*{1}{c}}
+\begin{tabular}{l*{3}{c}}
 \hline\hline
-                    &\multicolumn{1}{c}{(1)}\\
-                    &\multicolumn{1}{c}{Q14a Type of society: What type of society is <Rs country> today - which diagram}\\
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
+                    &\multicolumn{1}{c}{Q14a Type of society: What type of society is <Rs country> today - which diagram}&\multicolumn{1}{c}{Q14a Type of society: What type of society is <Rs country> today - which diagram}&\multicolumn{1}{c}{BC}\\
 \hline
-RECODE of DEGREE (R: Education II-highest education level)=1&           0         \\
-RECODE of DEGREE (R: Education II-highest education level)=2&       2.275\sym{**} \\
-RECODE of DEGREE (R: Education II-highest education level)=3&       5.709\sym{***}\\
-RECODE of SEX (R: Sex)&      -0.935         \\
-AU-Australia        &           0         \\
-CZ-Czech Republic   &      -16.28\sym{***}\\
-DK-Denmark          &       16.51\sym{***}\\
-EE-Estonia          &      -15.13\sym{***}\\
-FI-Finland          &       5.138\sym{**} \\
-FR-France           &       0.680         \\
-DE-Germany          &      -3.656\sym{*}  \\
-IT-Italy            &      -9.014\sym{***}\\
-JP-Japan            &       7.110\sym{***}\\
-KR-South Korea      &      -3.956\sym{**} \\
-NO-Norway           &       17.52\sym{***}\\
-PL-Poland           &      -17.19\sym{***}\\
-RU-Russia           &      -21.79\sym{***}\\
-SK-Slovak Republic  &      -31.39\sym{***}\\
-SI-Slovenia         &      -16.81\sym{***}\\
-ZA-South Africa     &       16.02\sym{***}\\
-ES-Spain            &       4.095\sym{*}  \\
-GB-GBN-Great Britain and/or United Kingdom&       0.346         \\
-US-United States    &      -10.22\sym{***}\\
-RECODE of URBRURAL (Type of community: R self-assessment)&       0.850         \\
-Bottom, Lowest, 01  &           0         \\
-02                  &       7.983\sym{***}\\
-03                  &       6.261\sym{***}\\
-04                  &       10.40\sym{***}\\
-05                  &       15.40\sym{***}\\
-06                  &       17.68\sym{***}\\
-07                  &       19.55\sym{***}\\
-08                  &       20.12\sym{***}\\
-09                  &       17.71\sym{***}\\
-Top, Highest, 10    &       13.93\sym{***}\\
-RECODE of PARTY\_LR (R: Party affiliation: left-right (derived from nat\_party aff=1&           0         \\
-RECODE of PARTY\_LR (R: Party affiliation: left-right (derived from nat\_party aff=2&      -2.090\sym{**} \\
-RECODE of PARTY\_LR (R: Party affiliation: left-right (derived from nat\_party aff=3&       1.011         \\
-R: Age              &     -0.0333         \\
-RECODE of ISCO88 (R: Occupation ILO,ISCO 1988 4-digit)=1&           0         \\
-RECODE of ISCO88 (R: Occupation ILO,ISCO 1988 4-digit)=2&       2.223\sym{*}  \\
-RECODE of ISCO88 (R: Occupation ILO,ISCO 1988 4-digit)=3&       0.660         \\
-RECODE of ISCO88 (R: Occupation ILO,ISCO 1988 4-digit)=4&      -0.764         \\
-RECODE of ISCO88 (R: Occupation ILO,ISCO 1988 4-digit)=5&      -0.874         \\
-RECODE of ISCO88 (R: Occupation ILO,ISCO 1988 4-digit)=6&       2.192         \\
-RECODE of ISCO88 (R: Occupation ILO,ISCO 1988 4-digit)=7&      -1.547         \\
-RECODE of ISCO88 (R: Occupation ILO,ISCO 1988 4-digit)=8&      -1.126         \\
-RECODE of ISCO88 (R: Occupation ILO,ISCO 1988 4-digit)=9&       1.496         \\
-RECODE of ISCO88 (R: Occupation ILO,ISCO 1988 4-digit)=10&      -5.078         \\
-Constant            &       53.79\sym{***}\\
+RECODE of DEGREE (R: Education II-highest education level)=1&           0         &           0         &           0         \\
+RECODE of DEGREE (R: Education II-highest education level)=2&       2.740\sym{***}&       2.335\sym{***}&      0.0230\sym{**} \\
+RECODE of DEGREE (R: Education II-highest education level)=3&       6.685\sym{***}&       5.852\sym{***}&      0.0572\sym{***}\\
+RECODE of SEX (R: Sex)&      -0.454         &      -0.893         &     -0.0276\sym{***}\\
+Bottom, Lowest, 01  &           0         &           0         &           0         \\
+02                  &       6.671\sym{***}&       7.962\sym{***}&      0.0269         \\
+03                  &       5.995\sym{***}&       6.232\sym{***}&     0.00869         \\
+04                  &       10.02\sym{***}&       10.39\sym{***}&      0.0344         \\
+05                  &       15.30\sym{***}&       15.36\sym{***}&      0.0417         \\
+06                  &       17.33\sym{***}&       17.62\sym{***}&      0.0666\sym{**} \\
+07                  &       19.44\sym{***}&       19.52\sym{***}&      0.0837\sym{***}\\
+08                  &       20.17\sym{***}&       20.05\sym{***}&      0.0918\sym{***}\\
+09                  &       17.47\sym{***}&       17.65\sym{***}&       0.104\sym{**} \\
+Top, Highest, 10    &       15.72\sym{***}&       13.76\sym{***}&      0.0714         \\
+RECODE of AGE (R: Age)=1&           0         &           0         &           0         \\
+RECODE of AGE (R: Age)=2&       0.800         &      -0.982         &    -0.00527         \\
+RECODE of AGE (R: Age)=3&      -0.564         &      -2.056         &    -0.00619         \\
+RECODE of AGE (R: Age)=4&      -1.023         &      -2.201         &    -0.00781         \\
+RECODE of AGE (R: Age)=5&      -0.399         &      -1.791         &     -0.0291         \\
+RECODE of AGE (R: Age)=6&      -0.820         &      -2.213         &     -0.0298         \\
+RECODE of AGE (R: Age)=7&      -0.833         &      -2.229         &     -0.0286         \\
+RECODE of AGE (R: Age)=8&      -1.695         &      -2.762\sym{*}  &     -0.0397\sym{*}  \\
+RECODE of AGE (R: Age)=9&      -0.364         &      -1.519         &     -0.0480\sym{**} \\
+RECODE of AGE (R: Age)=10&      -0.415         &      -2.154         &     -0.0544\sym{**} \\
+AU-Australia        &           0         &           0         &           0         \\
+TW-Taiwan           &       1.530         &                     &                     \\
+CZ-Czech Republic   &      -17.70\sym{***}&      -16.26\sym{***}&     -0.0602\sym{**} \\
+DK-Denmark          &       16.95\sym{***}&       16.56\sym{***}&       0.356\sym{***}\\
+EE-Estonia          &      -14.67\sym{***}&      -15.17\sym{***}&      -0.114\sym{***}\\
+FI-Finland          &       6.008\sym{***}&       5.135\sym{**} &       0.122\sym{***}\\
+FR-France           &       0.248         &       0.743         &     -0.0310         \\
+DE-Germany          &      -4.100\sym{**} &      -3.590\sym{*}  &     -0.0241         \\
+HU-Hungary          &      -35.33\sym{***}&                     &                     \\
+IS-Iceland          &       3.799\sym{*}  &                     &                     \\
+IT-Italy            &      -11.73\sym{***}&      -8.962\sym{***}&     -0.0479\sym{*}  \\
+JP-Japan            &       7.393\sym{***}&       7.183\sym{***}&      0.0840\sym{***}\\
+KR-South Korea      &      -3.426\sym{**} &      -3.831\sym{**} &      0.0567\sym{***}\\
+NO-Norway           &       17.29\sym{***}&       17.57\sym{***}&       0.358\sym{***}\\
+PL-Poland           &      -17.82\sym{***}&      -17.12\sym{***}&     -0.0745\sym{***}\\
+RU-Russia           &      -21.39\sym{***}&      -21.79\sym{***}&     -0.0977\sym{***}\\
+SK-Slovak Republic  &      -32.11\sym{***}&      -31.31\sym{***}&      -0.133\sym{***}\\
+SI-Slovenia         &      -16.49\sym{***}&      -16.69\sym{***}&     -0.0941\sym{***}\\
+ZA-South Africa     &       16.71\sym{***}&       16.16\sym{***}&       0.301\sym{***}\\
+ES-Spain            &       2.841         &       4.184\sym{*}  &      0.0312         \\
+GB-GBN-Great Britain and/or United Kingdom&       0.335         &       0.423         &    -0.00849         \\
+US-United States    &      -9.966\sym{***}&      -10.12\sym{***}&      -0.118\sym{***}\\
+RECODE of URBRURAL (Type of community: R self-assessment)&                     &       0.826         &      0.0126         \\
+RECODE of PARTY\_LR (R: Party affiliation: left-right (derived from nat\_party aff=1&                     &       2.112\sym{**} &      0.0275\sym{**} \\
+RECODE of PARTY\_LR (R: Party affiliation: left-right (derived from nat\_party aff=2&                     &           0         &           0         \\
+RECODE of PARTY\_LR (R: Party affiliation: left-right (derived from nat\_party aff=3&                     &       3.089\sym{***}&      0.0212\sym{*}  \\
+RECODE of ISCO88 (R: Occupation ILO,ISCO 1988 4-digit)=1&                     &           0         &           0         \\
+RECODE of ISCO88 (R: Occupation ILO,ISCO 1988 4-digit)=2&                     &       2.215\sym{*}  &      0.0287\sym{*}  \\
+RECODE of ISCO88 (R: Occupation ILO,ISCO 1988 4-digit)=3&                     &       0.675         &     0.00948         \\
+RECODE of ISCO88 (R: Occupation ILO,ISCO 1988 4-digit)=4&                     &      -0.809         &    -0.00708         \\
+RECODE of ISCO88 (R: Occupation ILO,ISCO 1988 4-digit)=5&                     &      -0.978         &     -0.0366\sym{**} \\
+RECODE of ISCO88 (R: Occupation ILO,ISCO 1988 4-digit)=6&                     &       2.150         &     0.00970         \\
+RECODE of ISCO88 (R: Occupation ILO,ISCO 1988 4-digit)=7&                     &      -1.549         &     -0.0171         \\
+RECODE of ISCO88 (R: Occupation ILO,ISCO 1988 4-digit)=8&                     &      -1.113         &     -0.0446\sym{**} \\
+RECODE of ISCO88 (R: Occupation ILO,ISCO 1988 4-digit)=9&                     &       1.413         &     -0.0119         \\
+RECODE of ISCO88 (R: Occupation ILO,ISCO 1988 4-digit)=10&                     &      -5.269         &     -0.0441         \\
+Constant            &       52.37\sym{***}&       52.00\sym{***}&       0.160\sym{***}\\
 \hline
-Observations        &       15339         \\
-Adjusted \(R^{2}\)  &       0.184         \\
+Observations        &       21319         &       15339         &       16066         \\
+Adjusted \(R^{2}\)  &       0.208         &       0.184         &       0.162         \\
 \hline\hline
-\multicolumn{2}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\multicolumn{4}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
 \end{tabular}
 \end{table}
