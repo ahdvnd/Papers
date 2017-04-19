@@ -119,7 +119,7 @@ recode ISCO88 (0/999=10) (1000/1999=1) (2000/2999=2) (3000/3999=3) (4000/4999=4)
 eststo clear
 eststo: reg V54 i.degree female i.TOPBOT i.age i.V5
 eststo: reg V54 i.degree female i.TOPBOT i.age i.V5 city ib2.party i.occ
-eststo: reg BC  i.degree female i.TOPBOT i.age i.V5 city i.party i.occ
+eststo: reg BC  i.degree female i.TOPBOT i.age i.V5 city ib2.party i.occ
 
 esttab using reg1.tex, replace label not ar2 title(Basic Regression\label{reg1})
 
