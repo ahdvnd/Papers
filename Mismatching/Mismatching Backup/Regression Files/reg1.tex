@@ -1,0 +1,47 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Regression 1 \label{reg1}}
+\begin{tabular}{l*{6}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}&\multicolumn{1}{c}{(5)}&\multicolumn{1}{c}{(6)}\\
+                    &\multicolumn{1}{c}{log\_wage}&\multicolumn{1}{c}{log\_wage}&\multicolumn{1}{c}{log\_wage}&\multicolumn{1}{c}{log\_wage}&\multicolumn{1}{c}{log\_wage}&\multicolumn{1}{c}{log\_wage}\\
+                    &           b         &           b         &           b         &           b         &           b         &           b         \\
+\hline
+Matching Score      &      0.0088\sym{***}&                     &                     &                     &      0.0172\sym{***}&                     \\
+exp2                &      0.0652\sym{***}&      0.0641\sym{***}&      0.0629\sym{***}&      0.0641\sym{***}&      0.0641\sym{***}&                     \\
+matching\_score\_norm &                     &      0.0089\sym{***}&      0.0079\sym{***}&                     &                     &                     \\
+Female              &                     &     -0.1184         &     -0.1135         &     -0.2491\sym{***}&     -0.1184         &     -0.2711\sym{***}\\
+matchxgender        &                     &     -0.0068\sym{**} &     -0.0059\sym{**} &                     &                     &                     \\
+R1302400            &                     &      0.0017         &     -0.0004         &      0.0017         &      0.0017         &      0.0055         \\
+R0538700=1          &                     &      0.0000         &      0.0000         &      0.0000         &      0.0000         &                     \\
+R0538700=2          &                     &     -0.0708         &     -0.0566         &     -0.0708         &     -0.0708         &                     \\
+R0538700=3          &                     &      0.3653\sym{***}&      0.3826\sym{***}&      0.3653\sym{***}&      0.3653\sym{***}&                     \\
+R0538700=4          &                     &      0.3009\sym{**} &      0.3023\sym{**} &      0.3009\sym{**} &      0.3009\sym{**} &                     \\
+R0538700=5          &                     &      0.1667         &      0.1639         &      0.1667         &      0.1667         &                     \\
+R9829600            &                     &      0.0000         &      0.0000         &      0.0000         &      0.0000         &      0.0000\sym{**} \\
+RECODE of marital\_status (T8134100)&                     &      0.1787\sym{***}&      0.1826\sym{***}&      0.1787\sym{***}&      0.1787\sym{***}&      0.0623         \\
+T8129300            &                     &     -0.0986\sym{***}&     -0.0977\sym{***}&     -0.0986\sym{***}&     -0.0986\sym{***}&                     \\
+Associate           &                     &     -0.2495\sym{**} &     -0.2218\sym{*}  &     -0.2495\sym{**} &     -0.2495\sym{**} &                     \\
+RECODE of major2=1  &                     &                     &      0.0000         &                     &                     &                     \\
+RECODE of major2=2  &                     &                     &      0.2973\sym{*}  &                     &                     &                     \\
+RECODE of major2=3  &                     &                     &      0.3816\sym{*}  &                     &                     &                     \\
+RECODE of major2=4  &                     &                     &      0.5798\sym{***}&                     &                     &                     \\
+RECODE of major2=5  &                     &                     &      0.4759\sym{**} &                     &                     &                     \\
+RECODE of major2=6  &                     &                     &      0.2266         &                     &                     &                     \\
+Standardized values of (matching\_score)     &                     &                     &                     &      0.1855\sym{***}&                     &                     \\
+matchzxgender       &                     &                     &                     &     -0.1403\sym{**} &                     &                     \\
+mxgender            &                     &                     &                     &                     &     -0.0130\sym{**} &                     \\
+hi\_match            &                     &                     &                     &                     &                     &      0.1354\sym{**} \\
+exp                 &                     &                     &                     &                     &                     &      0.0008         \\
+exp\_sqrd            &                     &                     &                     &                     &                     &      0.0000         \\
+R1482600=1          &                     &                     &                     &                     &                     &      0.0000         \\
+R1482600=2          &                     &                     &                     &                     &                     &      0.1508         \\
+R1482600=3          &                     &                     &                     &                     &                     &     -0.5954         \\
+R1482600=4          &                     &                     &                     &                     &                     &      0.0950         \\
+Constant            &      9.8965\sym{***}&      9.9479\sym{***}&      9.6736\sym{***}&     10.1208\sym{***}&      9.9479\sym{***}&      9.7640\sym{***}\\
+\hline
+Observations        &         742         &         583         &         580         &         583         &         583         &         584         \\
+Adjusted \(R^{2}\)  &       0.063         &       0.149         &       0.160         &       0.149         &       0.149         &       0.094         \\
+\hline\hline
+\end{tabular}
+\end{table}
