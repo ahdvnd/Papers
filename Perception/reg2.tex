@@ -1,0 +1,47 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Multinomial Logit Regression \label{reg2}}
+\begin{tabular}{l*{3}{D{.}{.}{-0.5}}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
+                    &\multicolumn{1}{c}{} &\multicolumn{1}{c}{} &\multicolumn{1}{c}{} \\
+                    &           b         &           b         &           b         \\
+\hline
+RECODE of SEX (R: Sex)&     -0.0092\sym{*}  &     -0.0074         &      0.0086         \\
+Low                 &      0.0000         &      0.0000         &      0.0000         \\
+Medium              &      0.0128\sym{**} &      0.0300         &     -0.0145         \\
+High                &      0.0387\sym{***}&      0.0550         &     -0.0280         \\
+20- to 29-year olds &      0.0000         &      0.0000         &      0.0000         \\
+30- to 39-year olds &     -0.0109         &     -0.0190         &      0.0026         \\
+40- to 49-year olds &     -0.0077         &     -0.0032         &      0.0157         \\
+50- to 59-year olds &     -0.0080         &     -0.0094         &      0.0140         \\
+60- to 69-year olds &     -0.0146         &     -0.0208         &      0.0200         \\
+Left                &      0.0005         &      0.0081         &     -0.0157         \\
+Center              &      0.0000         &      0.0000         &      0.0000         \\
+Right               &      0.0420\sym{***}&      0.0249         &     -0.0235         \\
+Lives in Urban Areas&      0.0086         &      0.0189         &     -0.0053         \\
+AU-Australia        &      0.0000         &      0.0000         &      0.0000         \\
+CZ-Czech Republic   &     -0.0311         &      0.1413         &     -0.0464         \\
+DK-Denmark          &     -0.3858\sym{***}&      0.0322         &      0.2859         \\
+EE-Estonia          &     -0.3858\sym{***}&      0.0860         &      0.7203         \\
+FI-Finland          &     -0.3858\sym{***}&      0.3517         &      0.2437         \\
+FR-France           &     -0.2699\sym{***}&      0.0000         &     -0.0631         \\
+DE-Germany          &     -0.3858\sym{***}&      0.2130         &     -0.0631         \\
+IT-Italy            &     -0.0915\sym{***}&      0.1372         &     -0.0487         \\
+JP-Japan            &     -0.3858\sym{***}&     -0.0000         &      0.4681         \\
+NO-Norway           &     -0.3858\sym{***}&      0.6333         &      0.0270         \\
+PL-Poland           &     -0.3626\sym{***}&      0.4501         &     -0.0631         \\
+RU-Russia           &     -0.3858\sym{***}&      0.6668         &      0.0438         \\
+SK-Slovak Republic  &      0.0602\sym{**} &      0.0153         &     -0.0631         \\
+SI-Slovenia         &     -0.3595\sym{***}&      0.0000         &     -0.0631         \\
+ZA-South Africa     &      0.0821\sym{***}&     -0.0000         &     -0.0631         \\
+ES-Spain            &     -0.1810\sym{***}&      0.0000         &     -0.0631         \\
+GB-GBN-Great Britain and/or United Kingdom&     -0.1764\sym{***}&      0.0000         &     -0.0631         \\
+US-United States    &     -0.0948\sym{***}&      0.0000         &     -0.0631         \\
+\hline
+Observations        &       14825         &       14825         &       14825         \\
+Adjusted \(R^{2}\)  &                     &                     &                     \\
+\hline\hline
+\multicolumn{4}{l}{\footnotesize Add note here.}\\
+\end{tabular}
+\end{table}

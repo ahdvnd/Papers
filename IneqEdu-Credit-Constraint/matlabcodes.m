@@ -1,5 +1,8 @@
-%clear
-%clc
+
+%Old Codes
+
+clear
+clc
 %for m=1:49
 %L1=0.01*m; L2=0.5-L1; L3=.24; L4=.25; alow=24113; ahigh=78405; hmin=12.48; hlow=14.24; hhigh=15.43;
 %g1=log(hmin/hlow); g2=log(alow/hhigh); g3=log(hlow/hhigh);

@@ -15,6 +15,8 @@ keep if C_ALPHAN=="AU" | C_ALPHAN=="TW" | C_ALPHAN=="CZ" | C_ALPHAN=="DK" | C_AL
 drop if V54==. | V54==8 | V54==9
 
 gen V54edu = V54
+gen V54age = V54
+gen V54gen = V54
 
 
 drop if AGE<20                         
@@ -41,8 +43,6 @@ recode PARTY_LR (3 7=1) (1/2=2) (4/5=3), gen(party) // 1= left 2= center, 3= rig
 drop if ISCO88>=9996
 drop if ISCO88==0
 recode ISCO88 (0/999=10) (1000/1999=1) (2000/2999=2) (3000/3999=3) (4000/4999=4) (5000/5999=5) (6000/6999=6) (7000/7999=7) (8000/8999=8) (9000/9999=9), gen(occ)
-
-
 
 
 // Since distributions B and C are the closest to the overall distribution in the US, BC shows whether the person chose either of these distributions.
@@ -195,6 +195,195 @@ recode V54edu (1=51.31) (2=100) (3=99.83) (4=34.23) (5=0) if C_ALPHAN=="US"
 }
 
 
+
+
+
+
+// Age reference groups
+
+if age==1 {
+recode V54age (1= 0) (2= 84.44) (3= 100) (4= 64.49) (5= 21.76) if C_ALPHAN=="AU"
+recode V54age (1= 0) (2= 47.49) (3= 70.64) (4= 100) (5= 86.19) if C_ALPHAN=="TW"
+recode V54age (1= 0) (2= 87.63) (3= 100) (4= 60.9) (5= 24.47) if C_ALPHAN=="CZ"
+recode V54age (1= 0) (2= 78.03) (3= 100) (4= 72.23) (5= 61.04) if C_ALPHAN=="DK"
+recode V54age (1= 96.1) (2= 100) (3= 75.56) (4= 15.74) (5= 0) if C_ALPHAN=="EE" 
+recode V54age (1= 2.66) (2= 90.16) (3= 100) (4= 22.19) (5= 0) if C_ALPHAN=="FI" 
+recode V54age (1= 89.89) (2= 100) (3= 65.27) (4= 12.9) (5= 0) if C_ALPHAN=="FR" 
+recode V54age (1= 68.5) (2= 100) (3= 89.59) (4= 10.12) (5= 0) if C_ALPHAN=="DE" 
+recode V54age (1= 2.12) (2= 100) (3= 97.11) (4= 52.41) (5= 0) if C_ALPHAN=="HU" 
+recode V54age (1= 14.89) (2= 87.96) (3= 100) (4= 35.48) (5= 0) if C_ALPHAN=="IS"
+recode V54age (1= 0) (2= 87.92) (3= 100) (4= 79.97) (5= 68.65) if C_ALPHAN=="IT"
+recode V54age (1= 0) (2= 85.7) (3= 100) (4= 72.19) (5= 53.77) if C_ALPHAN=="JP"
+recode V54age (1= 0) (2= 88.04) (3= 100) (4= 42.22) (5= 26.95) if C_ALPHAN=="NO"
+recode V54age (1= 0) (2= 76.33) (3= 100) (4= 88.13) (5= 50.81) if C_ALPHAN=="PL"
+recode V54age (1= 0) (2= 79.88) (3= 100) (4= 56.78) (5= 29.26) if C_ALPHAN=="RU"
+recode V54age (1= 26.74) (2= 100) (3= 82.17) (4= 10.08) (5= 0) if C_ALPHAN=="SK"
+recode V54age (1= 87.03) (2= 100) (3= 73.61) (4= 0) (5= 14.45) if C_ALPHAN=="SI"
+recode V54age (1= 100) (2= 92.95) (3= 69.94) (4= 11.12) (5= 0) if C_ALPHAN=="ZA"
+recode V54age (1= 11.16) (2= 97.67) (3= 100) (4= 37.21) (5= 0) if C_ALPHAN=="ES"
+recode V54age (1= 11.28) (2= 97.56) (3= 100) (4= 41.31) (5= 0) if C_ALPHAN=="UK"
+recode V54age (1= 67.43) (2= 100) (3= 89.46) (4= 25) (5= 0) if C_ALPHAN=="US"
+}
+else if age==2 {
+recode V54age (1= 4.45) (2= 87.57) (3= 100) (4= 44.67) (5= 0) if C_ALPHAN=="AU"
+recode V54age (1= 0) (2= 58.96) (3= 85.91) (4= 100) (5= 83.69) if C_ALPHAN=="TW"
+recode V54age (1= 0) (2= 73.85) (3= 100) (4= 87.61) (5= 52.29) if C_ALPHAN=="CZ"
+recode V54age (1= 0) (2= 53.33) (3= 73.54) (4= 100) (5= 81.64) if C_ALPHAN=="DK"
+recode V54age (1= 50.95) (2= 100) (3= 99.91) (4= 33.07) (5= 0) if C_ALPHAN=="EE" 
+recode V54age (1= 0) (2= 73.65) (3= 99.27) (4= 100) (5= 66.4) if C_ALPHAN=="FI" 
+recode V54age (1= 0) (2= 91.46) (3= 100) (4= 68.29) (5= 9.76) if C_ALPHAN=="FR" 
+recode V54age (1= 0) (2= 91.05) (3= 100) (4= 51.42) (5= 6.53) if C_ALPHAN=="DE" 
+recode V54age (1= 0) (2= 78.99) (3= 97.73) (4= 100) (5= 77.14) if C_ALPHAN=="HU" 
+recode V54age (1= 0) (2= 78) (3= 100) (4= 81.61) (5= 51.04) if C_ALPHAN=="IS"
+recode V54age (1= 0) (2= 78.75) (3= 96.02) (4= 100) (5= 50.66) if C_ALPHAN=="IT"
+recode V54age (1= 0) (2= 100) (3= 98.41) (4= 68.85) (5= 39.88) if C_ALPHAN=="JP"
+recode V54age (1= 0) (2= 59.68) (3= 80.65) (4= 100) (5= 72.45) if C_ALPHAN=="NO"
+recode V54age (1= 0) (2= 77.15) (3= 100) (4= 67.06) (5= 25.2) if C_ALPHAN=="PL"
+recode V54age (1= 18.68) (2= 87.12) (3= 100) (4= 33.79) (5= 0) if C_ALPHAN=="RU"
+recode V54age (1= 0) (2= 77.75) (3= 99.84) (4= 100) (5= 59.86) if C_ALPHAN=="SK"
+recode V54age (1= 0) (2= 51.43) (3= 67.01) (4= 100) (5= 91.67) if C_ALPHAN=="SI"
+recode V54age (1= 100) (2= 86.66) (3= 62.03) (4= 4.73) (5= 0) if C_ALPHAN=="ZA"
+recode V54age (1= 0) (2= 81.7) (3= 100) (4= 81.81) (5= 45.74) if C_ALPHAN=="ES"
+recode V54age (1= 24.68) (2= 92.33) (3= 100) (4= 43.76) (5= 0) if C_ALPHAN=="UK"
+recode V54age (1= 43.86) (2= 98.75) (3= 100) (4= 35.7) (5= ) if C_ALPHAN=="US"
+}
+else if age==3 {
+recode V54age (1= 41.02) (2= 96.86) (3= 100) (4= 36.98) (5= 0) if C_ALPHAN=="AU"
+recode V54age (1= 0) (2= 71.69) (3= 100) (4= 86.83) (5= 64.42) if C_ALPHAN=="TW"
+recode V54age (1= 0) (2= 72.96) (3= 100) (4= 91.27) (5= 54.08) if C_ALPHAN=="CZ"
+recode V54age (1= 0) (2= 59.95) (3= 83.93) (4= 100) (5= 72.09) if C_ALPHAN=="DK"
+recode V54age (1= 21.05) (2= 87.6) (3= 100) (4= 43.44) (5= 0) if C_ALPHAN=="EE" 
+recode V54age (1= 0) (2= 74.82) (3= 100) (4= 93.43) (5= 59.45) if C_ALPHAN=="FI" 
+recode V54age (1= 0) (2= 89.74) (3= 100) (4= 58.05) (5= 2.08) if C_ALPHAN=="FR" 
+recode V54age (1= 20.64) (2= 91.44) (3= 100) (4= 45.13) (5= 0) if C_ALPHAN=="DE" 
+recode V54age (1= 0) (2= 84.27) (3= 100) (4= 73.19) (5= 30.75) if C_ALPHAN=="HU" 
+recode V54age (1= 0) (2= 74.15) (3= 100) (4= 84.81) (5= 51.64) if C_ALPHAN=="IS"
+recode V54age (1= 0) (2= 84) (3= 100) (4= 69.35) (5= 9.39) if C_ALPHAN=="IT"
+recode V54age (1= 51.89) (2= 100) (3= 71.7) (4= 5.97) (5= 0) if C_ALPHAN=="JP"
+recode V54age (1= 0) (2= 68.08) (3= 94.61) (4= 100) (5= 66.1) if C_ALPHAN=="NO"
+recode V54age (1= 0) (2= 75.92) (3= 100) (4= 83.64) (5= 43.12) if C_ALPHAN=="PL"
+recode V54age (1= 39.29) (2= 93.79) (3= 100) (4= 32.23) (5= 0) if C_ALPHAN=="RU"
+recode V54age (1= 0) (2= 60.63) (3= 81.4) (4= 100) (5= 71.94) if C_ALPHAN=="SK"
+recode V54age (1= 0) (2= 57.07) (3= 76.4) (4= 100) (5= 82.1) if C_ALPHAN=="SI"
+recode V54age (1= 100) (2= 77.69) (3= 49.37) (4= 0.07) (5= 0) if C_ALPHAN=="ZA"
+recode V54age (1= 0) (2= 84.17) (3= 100) (4= 55.47) (5= 17.7) if C_ALPHAN=="ES"
+recode V54age (1= 55.35) (2= 100) (3= 99.12) (4= 34.84) (5= 0) if C_ALPHAN=="UK"
+recode V54age (1= 60.81) (2= 100) (3= 96.03) (4= 28.54) (5= 0) if C_ALPHAN=="US" 
+}
+else if age==4 {
+recode V54age (1= 71.62) (2= 100) (3= 89.45) (4= 28.45) (5= 0) if C_ALPHAN=="AU"
+recode V54age (1= 0) (2= 78.81) (3= 100) (4= 46.12) (5= 8.22) if C_ALPHAN=="TW"
+recode V54age (1= 0) (2= 71.94) (3= 100) (4= 93.48) (5= 71.61) if C_ALPHAN=="CZ"
+recode V54age (1= 0) (2= 59.04) (3= 82.98) (4= 100) (5= 73.41) if C_ALPHAN=="DK"
+recode V54age (1= 24.6) (2= 91.91) (3= 100) (4= 36.89) (5= 0) if C_ALPHAN=="EE" 
+recode V54age (1= 0) (2= 78.08) (3= 100) (4= 65.68) (5= 26.08) if C_ALPHAN=="FI" 
+recode V54age (1= 22.79) (2= 93.49) (3= 100) (4= 48.63) (5= 0) if C_ALPHAN=="FR" 
+recode V54age (1= 36.25) (2= 96.27) (3= 100) (4= 38.9) (5= 0) if C_ALPHAN=="DE" 
+recode V54age (1= 0) (2= 80.04) (3= 100) (4= 80.67) (5= 28.99) if C_ALPHAN=="HU" 
+recode V54age (1= 0) (2= 73.56) (3= 100) (4= 80.75) (5= 46.64) if C_ALPHAN=="IS"
+recode V54age (1= 4.65) (2= 83.82) (3= 100) (4= 57.27) (5= 0) if C_ALPHAN=="IT"
+recode V54age (1= 68.48) (2= 100) (3= 81.58) (4= 9.43) (5= 0) if C_ALPHAN=="JP"
+recode V54age (1= 0) (2= 71.99) (3= 100) (4= 94.43) (5= 56.43) if C_ALPHAN=="NO"
+recode V54age (1= 0) (2= 72.73) (3= 100) (4= 76.39) (5= 46.01) if C_ALPHAN=="PL"
+recode V54age (1= 0) (2= 75.93) (3= 100) (4= 48.31) (5= 14.92) if C_ALPHAN=="RU"
+recode V54age (1= 0) (2= 67.28) (3= 92.27) (4= 100) (5= 81.56) if C_ALPHAN=="SK"
+recode V54age (1= 0) (2= 73.4) (3= 100) (4= 93.37) (5= 64.38) if C_ALPHAN=="SI"
+recode V54age (1= 100) (2= 78.92) (3= 51.59) (4= 3.92) (5= 0) if C_ALPHAN=="ZA"
+recode V54age (1= 14.34) (2= 91.35) (3= 100) (4= 33.89) (5= 0) if C_ALPHAN=="ES"
+recode V54age (1= 62.58) (2= 100) (3= 94.7) (4= 28.56) (5= 0) if C_ALPHAN=="UK"
+recode V54age (1= 69.02) (2= 100) (3= 92.26) (4= 24.13) (5= 0) if C_ALPHAN=="US" 
+}
+else if age==5 {
+recode V54age (1= 61.84) (2= 96.72) (3= 100) (4= 22.14) (5= 0) if C_ALPHAN=="AU"
+recode V54age (1= 66.74) (2= 100) (3= 93.46) (4= 23.52) (5= 0) if C_ALPHAN=="TW"
+recode V54age (1= 0) (2= 67.18) (3= 100) (4= 82.04) (5= 55.15) if C_ALPHAN=="CZ"
+recode V54age (1= 0) (2= 69.54) (3= 100) (4= 96.59) (5= 71.6) if C_ALPHAN=="DK"
+recode V54age (1= 0) (2= 68.09) (3= 100) (4= 53.82) (5= 32.03) if C_ALPHAN=="EE" 
+recode V54age (1= 0) (2= 73.89) (3= 100) (4= 47.71) (5= 10.95) if C_ALPHAN=="FI" 
+recode V54age (1= 7.24) (2= 86.5) (3= 100) (4= 47.84) (5= 0) if C_ALPHAN=="FR" 
+recode V54age (1= 62.84) (2= 100) (3= 98.06) (4= 24.13) (5= 0) if C_ALPHAN=="DE" 
+recode V54age (1= 0) (2= 50.63) (3= 72.75) (4= 100) (5= 79.43) if C_ALPHAN=="HU" 
+recode V54age (1= 0) (2= 73.48) (3= 100) (4= 77.63) (5= 42.94) if C_ALPHAN=="IS"
+recode V54age (1= 18.13) (2= 86.96) (3= 100) (4= 50.52) (5= 0) if C_ALPHAN=="IT"
+recode V54age (1= 83.54) (2= 100) (3= 87.32) (4= 25.54) (5= 0) if C_ALPHAN=="JP"
+recode V54age (1= 0) (2= 71.69) (3= 100) (4= 89.92) (5= 55.31) if C_ALPHAN=="NO"
+recode V54age (1= 0) (2= 65.79) (3= 97.56) (4= 100) (5= 73.89) if C_ALPHAN=="PL"
+recode V54age (1= 0) (2= 69.11) (3= 100) (4= 66.59) (5= 37.93) if C_ALPHAN=="RU"
+recode V54age (1= 0) (2= 54.23) (3= 79.17) (4= 100) (5= 72.68) if C_ALPHAN=="SK"
+recode V54age (1= 0) (2= 66.25) (3= 86.18) (4= 100) (5= 63.62) if C_ALPHAN=="SI"
+recode V54age (1= 11.31) (2= 70.12) (3= 100) (4= 19.29) (5= 0) if C_ALPHAN=="ZA"
+recode V54age (1= 0) (2= 78.55) (3= 100) (4= 38.66) (5= 8.28) if C_ALPHAN=="ES"
+recode V54age (1= 44.55) (2= 95.12) (3= 100) (4= 29.26) (5= 0) if C_ALPHAN=="UK"
+recode V54age (1= 83.55) (2= 100) (3= 86.17) (4= 20.29) (5= 0) if C_ALPHAN=="US" 
+}
+
+
+
+
+
+// Gender reference groups
+
+if SEX==1 {
+recode V54gen (1=58.01) (2=100) (3=93.7) (4=32.2) (5=0) if C_ALPHAN=="AU"
+recode V54gen (1=0) (2=73.35) (3=100) (4=79.32) (5=48.65) if C_ALPHAN=="TW"
+recode V54gen (1=0) (2=71.99) (3=100) (4=87.48) (5=55) if C_ALPHAN=="CZ"
+recode V54gen (1=0) (2=76.27) (3=100) (4=88.68) (5=50.51) if C_ALPHAN=="DK"
+recode V54gen (1=64.76) (2=100) (3=92.15) (4=29.52) (5=0) if C_ALPHAN=="EE"
+recode V54gen (1=0.23) (2=84.35) (3=100) (4=43.02) (5=0) if C_ALPHAN=="FI"
+recode V54gen (1=8.73) (2=88.54) (3=100) (4=52.29) (5=0) if C_ALPHAN=="FR"
+recode V54gen (1=25.34) (2=93.27) (3=100) (4=40.9) (5=0) if C_ALPHAN=="DE"
+recode V54gen (1=0) (2=78.16) (3=99.29) (4=100) (5=62.83) if C_ALPHAN=="HU"
+recode V54gen (1=0) (2=86.27) (3=100) (4=45.57) (5=2.07) if C_ALPHAN=="IS"
+recode V54gen (1=0) (2=76.61) (3=100) (4=68.78) (5=22.93) if C_ALPHAN=="IT"
+recode V54gen (1=0) (2=74.96) (3=100) (4=86.56) (5=54.96) if C_ALPHAN=="JP"
+recode V54gen (1=0) (2=77.81) (3=100) (4=84.11) (5=40.46) if C_ALPHAN=="NO"
+recode V54gen (1=0) (2=75.09) (3=100) (4=81.5) (5=41.56) if C_ALPHAN=="PL"
+recode V54gen (1=0) (2=79.3) (3=100) (4=43.15) (5=8.45) if C_ALPHAN=="RU"
+recode V54gen (1=0) (2=77.53) (3=100) (4=97.3) (5=60.87) if C_ALPHAN=="SK"
+recode V54gen (1=0) (2=73.31) (3=89.4) (4=100) (5=69.46) if C_ALPHAN=="SI"
+recode V54gen (1=100) (2=87.69) (3=63.23) (4=7.92) (5=0) if C_ALPHAN=="ZA"
+recode V54gen (1=0) (2=81.54) (3=100) (4=64.07) (5=22.16) if C_ALPHAN=="ES"
+recode V54gen (1=50.81) (2=98.79) (3=100) (4=36.59) (5=0) if C_ALPHAN=="UK"
+recode V54gen (1=64.18) (2=100) (3=94.98) (4=27.22) (5=0) if C_ALPHAN=="US"
+}
+else if SEX==2 {
+recode V54gen (1=5.29) (2=83.28) (3=100) (4=36.03) (5=0) if C_ALPHAN=="AU"
+recode V54gen (1=0) (2=72.17) (3=100) (4=77.9) (5=48.27) if C_ALPHAN=="TW"
+recode V54gen (1=0) (2=71.35) (3=100) (4=82.42) (5=60.48) if C_ALPHAN=="CZ"
+recode V54gen (1=0) (2=60.89) (3=83.68) (4=100) (5=91.27) if C_ALPHAN=="DK"
+recode V54gen (1=15.2) (2=86.65) (3=100) (4=38.11) (5=0) if C_ALPHAN=="EE"
+recode V54gen (1=0) (2=75.65) (3=100) (4=86.64) (5=50) if C_ALPHAN=="FI"
+recode V54gen (1=46.94) (2=100) (3=89.76) (4=37.65) (5=0) if C_ALPHAN=="FR"
+recode V54gen (1=55.1) (2=100) (3=94.65) (4=24.98) (5=0) if C_ALPHAN=="DE"
+recode V54gen (1=0) (2=72.09) (3=95.95) (4=100) (5=68.92) if C_ALPHAN=="HU"
+recode V54gen (1=0) (2=76.78) (3=100) (4=83.48) (5=58.7) if C_ALPHAN=="IS"
+recode V54gen (1=0) (2=90.73) (3=100) (4=61.52) (5=17.84) if C_ALPHAN=="IT"
+recode V54gen (1=71.53) (2=100) (3=94.64) (4=22.56) (5=0) if C_ALPHAN=="JP"
+recode V54gen (1=0) (2=65.62) (3=86.89) (4=100) (5=84.96) if C_ALPHAN=="NO"
+recode V54gen (1=0) (2=71.96) (3=100) (4=81.25) (5=49.9) if C_ALPHAN=="PL"
+recode V54gen (1=0) (2=75.52) (3=100) (4=48.87) (5=11.09) if C_ALPHAN=="RU"
+recode V54gen (1=0) (2=72.81) (3=96.87) (4=100) (5=82.13) if C_ALPHAN=="SK"
+recode V54gen (1=0) (2=83.61) (3=100) (4=88.12) (5=61.76) if C_ALPHAN=="SI"
+recode V54gen (1=100) (2=80.74) (3=55.66) (4=2.65) (5=0) if C_ALPHAN=="ZA"
+recode V54gen (1=32.93) (2=94.01) (3=100) (4=32.24) (5=0) if C_ALPHAN=="ES"
+recode V54gen (1=44.91) (2=98.23) (3=100) (4=31.93) (5=0) if C_ALPHAN=="UK"
+recode V54gen (1=70.12) (2=100) (3=89.8) (4=25.34) (5=0) if C_ALPHAN=="US"
+}
+
+
+
+
+
+
+
+gen refgroup=0                                                      //overall
+replace refgroup=1 if V54edu>V54 & V54edu>V54age & V54edu>V54gen    //edu
+replace refgroup=2 if V54age>V54 & V54age>V54edu & V54age>V54gen    //age
+replace refgroup=3 if V54gen>V54 & V54gen>V54age & V54gen>V54edu    //gender
+
+
+
+
 label define edulabel 1 "Low" 2 "Medium" 3 "High"
 label values degree edulabel
 label define genderlabel 0 "Male" 1 "Female"
@@ -225,12 +414,28 @@ eststo: qui reg V54 female i.degree i.TOPBOT i.age i.V5
 eststo: qui reg V54 female i.degree i.TOPBOT i.age ib2.party i.occ city i.V5  
 eststo: qui reg BC  female i.degree i.TOPBOT i.age ib2.party i.occ city i.V5
 
-
 esttab using reg1.tex, replace label star(* 0.10 ** 0.05 *** 0.01) not ///
 		alignment(D{.}{.}{-0.5}) depvars ar2 cells(b(star fmt(4))) title(Basic Regression \label{reg1}) ///
 		addnotes(Add note here.)
 
 		
+//Multinomial Logit regression for the choice of reference group
+eststo clear
+mlogit refgroup female i.degree i.age ib2.party city i.V5 
+est sto m
+
+// This calculates the marginal effects for each of the three outcomes (outcome 1 is the base group)
+forval i = 1/3 {
+est res m
+margins, dydx(*) predict(outcome(`i')) post
+est sto m`i'
+}
+
+esttab m1 m2 m3 using reg2.tex, replace label star(* 0.10 ** 0.05 *** 0.01) not ///
+		alignment(D{.}{.}{-0.5}) depvars ar2 cells(b(star fmt(4))) unstack title(Multinomial Logit Regression \label{reg2}) ///
+		addnotes(Add note here.)
+
+
 		
 // This is for converting the dataset to long form to prepare it for nlogit
 
@@ -256,13 +461,37 @@ esttab using reg1.tex, replace label star(* 0.10 ** 0.05 *** 0.01) not ///
 
 // GRAPHS
 
-// This graphs shows which educational groups are more likely to look at the whole population rather than their reference groups
-gen V54dif=V54-V54edu
-graph bar (mean) V54dif, over(degree)
-
+// These graphs shows which education-related groups
+gen V54difedu=V54edu-V54
+graph bar (mean) V54difedu, over(degree) name(h1, replace)
 // this shows that there are differences in terms of political party
-graph bar (mean) V54dif, over(party)
+graph bar (mean) V54difedu, over(party, gap(*.8)) name(h2, replace) ytitle("The difference between education-related BC" "and overall BC across the political spectrum")
+// this shows that there are differences in V54dif by country
+graph bar (mean) V54difedu, over(C_ALPHAN, sort(V54difedu)) ytitle("The difference between education-related BC and overall BC") name(h3, replace)
 
+
+// These graphs shows which age-related groups
+gen V54difage = V54age-V54
+graph bar (mean) V54difage, over(C_ALPHAN, sort(V54difage)) ytitle("The difference between age-related BC and overall BC") name(h4, replace)
+graph bar (mean) V54difage, over(age, gap(*.8) label(labsize(medium) angle(45))) name(h5, replace) ytitle("The difference between age-related BC" "and overall BC across age groups", size(medium))
+
+
+// These graphs shows which gender-related groups
+gen V54difgen = V54gen-V54
+graph bar (mean) V54difgen, over(C_ALPHAN, sort(V54difgen)) ytitle("The difference between gender-related BC and overall BC") name(h6, replace)
+graph bar (mean) V54difgen, over(degree, gap(*.8) label(labsize(medium))) name(h7, replace) ytitle("The difference between gender-related BC" "and overall BC across gender groups", size(medium))
+
+
+
+// TABLES
+
+// This shows who is more likely to consider education as a reference group
+recode V18 (1 2=1) (3=2) (4 5=3), gen(V18n)
+recode V19 (1 2=1) (3=2) (4 5=3), gen(V19n)
+recode V20 (1 2=1) (3=2) (4 5=3), gen(V20n)
+tab V18n, sum(V54difedu)
+tab V19n, sum(V54difedu)
+tab V20n, sum(V54difedu)
 
 
 

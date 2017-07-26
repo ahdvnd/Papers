@@ -20,7 +20,12 @@ eststo: qui regress gini i.gender i.age ib2.race if year==2013
 eststo: qui regress gini i.gender i.age ib2.race i.year
 
 
-esttab using reg1.tex, replace label not ar2 title(Basic Regression\label{reg1})
+
+esttab using reg1.tex, replace label star(* 0.10 ** 0.05 *** 0.01) not ///
+		alignment(D{.}{.}{-0.5}) depvars ar2 cells(b(star fmt(3))) unstack title(Basic Regression\label{reg1}) ///
+		addnotes(Add note here.)
+
+
 
 
 eststo clear
@@ -30,7 +35,11 @@ eststo: qui regress gini_emp i.gender i.age ib2.race i.year if age <11
 eststo: qui regress gini_fl i.gender i.age ib2.race i.year if age <11
 
 
-esttab using reg2.tex, replace label not ar2 title(Cross Cohort Inequality Dynamic, Gini Coefficient (Full Time workers)\label{reg2})
+esttab using reg2.tex, replace label star(* 0.10 ** 0.05 *** 0.01) not ///
+		alignment(D{.}{.}{-0.5}) depvars ar2 cells(b(star fmt(4))) unstack title(Cross Cohort Inequality Dynamic, Gini Coefficient (Full Time workers)\label{reg2}) ///
+		addnotes(Add note here.)
+
+
 
 
 eststo clear
@@ -41,4 +50,7 @@ eststo: qui regress gini_emp i.gender i.age ib2.race marr_share var_child highed
 eststo: qui regress gini_fl i.gender i.age ib2.race marr_share var_child highed_share abstract_share manual_share cogroutine_share imgr_share i.year if age <11
 
 
-esttab using reg3.tex, replace label not ar2 title(Cross Cohort Inequality Dynamic for Different Inequality Measures\label{reg3})
+esttab using reg3.tex, replace label star(* 0.10 ** 0.05 *** 0.01) not ///
+		alignment(D{.}{.}{-0.5}) depvars ar2 cells(b(star fmt(4))) unstack title(Cross Cohort Inequality Dynamic for Different Inequality Measures\label{reg3}) ///
+		addnotes(Add note here.)
+
