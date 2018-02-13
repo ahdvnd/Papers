@@ -72,7 +72,7 @@ egen sex_race_age=group(sex race2 age2)
        
  
    
-ineqdec0 dpi, by(sex_race_age) 
+ineqdeco dpi, by(sex_race_age) 
  
 //tab sex_race_age, sum(marst2) nostandard nofreq //for calculating the share married in each cohort             
 //tab sex_race_age, sum(nchildren) nomeans nofreq //for calculating the variance of # of children in each cohort             
