@@ -31,7 +31,8 @@ drop if age>79
 //pshare estimate dpi, nquantiles(10)      
 //pshare estimate dpi if sex==1, nquantiles(10)     
 //pshare estimate dpi if sex==2, nquantiles(10)     
-          
+      
+    
  
 drop if ethnic_c > 4       
 recode ethnic_c (1=1) (3=2) (2 4=3), gen(race2) // Racial Categories: 1=white 2=black 3=hispanic                      
@@ -69,8 +70,9 @@ egen sex_race_age=group(sex race2 age2)
 //drop if enroll==.        
 //keep if enroll==200        
        
-    
-ineqdeco dpi, by(sex_race_age) 
+ 
+   
+ineqdec0 dpi, by(sex_race_age) 
  
 //tab sex_race_age, sum(marst2) nostandard nofreq //for calculating the share married in each cohort             
 //tab sex_race_age, sum(nchildren) nomeans nofreq //for calculating the variance of # of children in each cohort             
@@ -79,4 +81,4 @@ ineqdeco dpi, by(sex_race_age)
 //tab sex_race_age //for calculating the share of foreign-born individuals in each cohort               
          
                   
-}     
+}     
